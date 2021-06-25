@@ -15,6 +15,9 @@ export default new Vuex.Store({
         clickCuadradoVuex({commit},args) {
             commit('clickCuadrado',args)
         },
+        reset({commit}){
+            commit('resetState')
+        },
     },
     mutations : {
         clickCuadrado(state,args) {
@@ -28,5 +31,20 @@ export default new Vuex.Store({
                 state.colors.splice([args[1]], 1, '#232323')
             }
         },
+        resetState(state){
+            state.mensajeNavbar = ''
+            let numbers= state.isHard ? 6 : 3
+            var arr = [];
+            for (var i = 0; i < numbers; i++) {
+            arr.push("rgb(" + Math.floor(Math.random() * 256) + ", " + Math.floor(Math.random() * 256) + ", " + Math.floor(Math.random() * 256) + ")");
+            }
+            state.colors = arr
+            let cantidad= state.isHard? 6 : 3 
+            let number= Math.floor(Math.random() * cantidad);
+            state.pickedColor = state.colors[number]
+            // this.$emit('colorElegido',this.pickedColor)
+        },
+
     }
-})
+}
+)

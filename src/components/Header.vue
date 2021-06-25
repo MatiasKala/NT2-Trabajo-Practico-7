@@ -7,7 +7,7 @@
 			<br>
 			Guessing Game</h1>
 	</div>
-  <Navbar @resetearHeader="reset()" />
+  <Navbar/>
 </section>
 
 </template>
@@ -27,13 +27,9 @@
     },
     data () {
       return {
-        colorElegido:this.setColorElegido,
       }
     },
     methods: {
-      reset(){
-        this.colorBack=null
-      },
     },
     filters:{
       sacarRGB:value => {
@@ -46,9 +42,6 @@
           'backgroundColor':this.$store.state.colorBack ? this.$store.state.colorBack : 'steelblue'
         }
       },
-     setColorElegido(){
-        return this.$store.state.pickedColor
-      }
     }
 }
 

@@ -49,8 +49,8 @@
 			}
 		},
 		resetear(){
-			this.$store.state.message=""
-			this.$emit('resetear',this.$store.state.isHard)
+			this.$store.state.mensajeNavbar=""
+			this.$store.dispatch('reset')
 		},
     },
     computed: {
