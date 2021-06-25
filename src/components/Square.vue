@@ -1,7 +1,6 @@
 <template>
 
-  <div class="square" :style="{background: color}" @click="clickCudrado()">  
-    <div>{{contador}}</div>
+  <div class="square" :style="{background: this.$store.state.colors[this.pos]}" @click="clickCudrado()">  
   </div>
 
 </template>
@@ -10,7 +9,7 @@
 
   export default  {
     name: 'square',
-    props: ['color','pos','contador'],
+    props: ['pos'],
     mounted () {
 
     },
@@ -20,14 +19,11 @@
     },
     methods: {
       clickCudrado(){
-        this.$store.dispatch('clickCuadradoVuex',[this.color,this.pos])
-        // this.$emit('clickCuadrado',[this.color,this.pos])
+        this.$store.dispatch('clickCuadradoVuex',[this.$store.state.colors[this.pos],this.pos])
       }
     },
     computed: {
-      c:()=>{console.log('entre')
-        return this.color
-      }
+
     },
 }
 

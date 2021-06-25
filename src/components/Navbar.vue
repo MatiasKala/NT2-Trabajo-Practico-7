@@ -2,11 +2,11 @@
 
     <div id="navigator">
 		<button id="reset" @click="resetear()" > New colors</button>
-		<span id="message">{{message}}</span>
+		<span id="message">{{getMensaje}}</span>
 
-		<button id="easy" :class="getClass(!isHard)" @click="cambiarAfacil()">easy</button>
-		<button id="hard" :class="getClass(isHard)" @click="cambiarAdificil()">hard</button>
-        <Body :isHard="isHard" @colorGanador="mostrarMensajeGanador()" @colorPerdedor="mostrarMensajePerdedor()"/>
+		<button id="easy" :class="getClass(!this.$store.state.isHard)" @click="cambiarAfacil()">easy</button>
+		<button id="hard" :class="getClass(this.$store.state.isHard)" @click="cambiarAdificil()">hard</button>
+        <Body/>
 	</div>
 
 </template>
@@ -26,21 +26,18 @@
     },
     data () {
       return {
-        isHard:true,
-		colorElegido:"",
-		message:""
       }
     },
     methods: {
 		cambiarAfacil(){
-			if(this.isHard){
-				this.isHard = false
+			if(this.$store.state.isHard){
+				this.$store.state.isHard = false
 				this.resetear()
 			}
 		},
 		cambiarAdificil(){
-			if(!this.isHard){
-				this.isHard = true
+			if(!this.$store.state.isHard){
+				this.$store.state.isHard = true
 				this.resetear()
 			}
 		},
@@ -53,17 +50,13 @@
 		},
 		resetear(){
 			this.$store.state.message=""
-			this.$emit('resetear',this.isHard)
-		},
-		mostrarMensajeGanador(){
-			this.$store.state.message = "You Picked Right!"
-		},
-		mostrarMensajePerdedor(){
-			this.$store.state.message = "Try Again!"
+			this.$emit('resetear',this.$store.state.isHard)
 		},
     },
     computed: {
-		
+		getMensaje(){
+			return this.$store.state.mensajeNavbar
+		}
     }
 }
 

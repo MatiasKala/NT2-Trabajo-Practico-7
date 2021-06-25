@@ -3,7 +3,7 @@
 <section class="headerStyle">
   <div id="headerStyle" :style="getBackgroundColor" >
 		<h1>The Great <br>
-			<span id="colorDisplay">RGB {{colorElegido | sacarRGB}}</span>
+			<span id="colorDisplay">RGB {{this.$store.state.pickedColor | sacarRGB}}</span>
 			<br>
 			Guessing Game</h1>
 	</div>

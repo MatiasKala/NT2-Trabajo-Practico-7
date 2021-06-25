@@ -8,7 +8,8 @@ export default new Vuex.Store({
         colors:[],
         pickedColor:'',
         colorBack:'steelblue',
-        mensajeNavbar:''
+        mensajeNavbar:'',
+        isHard:true,
     },
     actions : {
         clickCuadradoVuex({commit},args) {
@@ -18,10 +19,12 @@ export default new Vuex.Store({
     mutations : {
         clickCuadrado(state,args) {
             if(args[0] == state.pickedColor){
+                state.mensajeNavbar = "You Picked Right!"
                 state.colors = state.colors.map(()=>{
                 return state.pickedColor
                 });
             } else {
+                state.mensajeNavbar = "Try Again!"
                 state.colors.splice([args[1]], 1, '#232323')
             }
         },

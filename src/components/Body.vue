@@ -2,14 +2,14 @@
 
   <div id="container">
     <div class="squares">
-      <Square :color="this.$store.state.colors[0]" :pos="0" @clickCuadrado="clickCuadrado($event)"/>
-      <Square :color="this.$store.state.colors[1]" :pos="1" @clickCuadrado="clickCuadrado($event)"/>
-      <Square :color="this.$store.state.colors[2]" :pos="2" @clickCuadrado="clickCuadrado($event)"/>
+      <Square :pos="0"/>
+      <Square :pos="1"/>
+      <Square :pos="2"/>
     </div>   
-    <div v-show="isHard" class="squares">
-      <Square :color="this.$store.state.colors[3]" :pos="3" @clickCuadrado="clickCuadrado($event)"/>
-      <Square :color="this.$store.state.colors[4]" :pos="4" @clickCuadrado="clickCuadrado($event)"/>
-      <Square :color="this.$store.state.colors[5]" :pos="5" @clickCuadrado="clickCuadrado($event)"/>
+    <div v-show="this.$store.state.isHard" class="squares">
+      <Square :pos="3"/>
+      <Square :pos="4"/>
+      <Square :pos="5"/>
     </div>   
   </div>
 
@@ -21,7 +21,7 @@
 
   export default  {
     name: 'body-component',
-    props: ['isHard'],
+    props: [],
     beforeMount(){
       this.$parent.$on('resetear',this.changeData)
     },
@@ -35,17 +35,16 @@
       return {
         colors:[],
         pickedColor:"",
-        esDificil:true,
       }
     },
     methods: {
       init(){
-        this.$store.state.colors = this.createNewColors(this.esDificil)
+        this.$store.state.colors = this.createNewColors(this.$store.state.isHard)
         this.$store.state.pickedColor = this.$store.state.colors[this.pickColor()]
         // this.$emit('colorElegido',this.pickedColor)
       },
-      createNewColors(bool){
-        let numbers= bool ? 6 : 3
+      createNewColors(){
+        let numbers= this.$store.state.isHard ? 6 : 3
         var arr = [];
         for (var i = 0; i < numbers; i++) {
           arr.push(this.createRandomStringColor());
@@ -60,12 +59,12 @@
         return Math.floor(Math.random() * 256);
       },
       pickColor(){
-        let cantidad= this.esDificil? 6 : 3 
+        let cantidad= this.$store.state.isHard? 6 : 3 
         let number= Math.floor(Math.random() * cantidad);
         return number
       },
       changeData(estado){
-        this.esDificil=estado
+        this.$store.state.isHard=estado
         this.init()
       },
     },
