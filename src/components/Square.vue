@@ -20,7 +20,8 @@
     },
     methods: {
       clickCudrado(){
-        this.$emit('clickCuadrado',[this.color,this.pos])
+        this.$store.dispatch('clickCuadradoVuex',[this.color,this.pos])
+        // this.$emit('clickCuadrado',[this.color,this.pos])
       }
     },
     computed: {

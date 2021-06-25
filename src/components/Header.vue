@@ -7,7 +7,7 @@
 			<br>
 			Guessing Game</h1>
 	</div>
-  <Navbar @colorElegidoHeader="setColorElegido($event)" @resetearHeader="reset()" @colorGanador="mostrarColorNav()" />
+  <Navbar @resetearHeader="reset()" />
 </section>
 
 </template>
@@ -27,17 +27,10 @@
     },
     data () {
       return {
-        colorElegido:null,
-        colorBack:"steelblue"
+        colorElegido:this.setColorElegido,
       }
     },
     methods: {
-      setColorElegido(color){
-        this.colorElegido = color
-      },
-      mostrarColorNav(){
-        this.colorBack=this.colorElegido
-      },
       reset(){
         this.colorBack=null
       },
@@ -50,9 +43,12 @@
     computed: {
       getBackgroundColor(){
         return{
-          'backgroundColor':this.colorBack ? this.colorBack : 'steelblue'
+          'backgroundColor':this.$store.state.colorBack ? this.$store.state.colorBack : 'steelblue'
         }
       },
+     setColorElegido(){
+        return this.$store.state.pickedColor
+      }
     }
 }
 

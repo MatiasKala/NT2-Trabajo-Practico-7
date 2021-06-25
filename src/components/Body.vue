@@ -2,14 +2,14 @@
 
   <div id="container">
     <div class="squares">
-      <Square :color="colors[0]" :pos="0" @clickCuadrado="clickCuadrado($event)"/>
-      <Square :color="colors[1]" :pos="1" @clickCuadrado="clickCuadrado($event)"/>
-      <Square :color="colors[2]" :pos="2" @clickCuadrado="clickCuadrado($event)"/>
+      <Square :color="this.$store.state.colors[0]" :pos="0" @clickCuadrado="clickCuadrado($event)"/>
+      <Square :color="this.$store.state.colors[1]" :pos="1" @clickCuadrado="clickCuadrado($event)"/>
+      <Square :color="this.$store.state.colors[2]" :pos="2" @clickCuadrado="clickCuadrado($event)"/>
     </div>   
     <div v-show="isHard" class="squares">
-      <Square :color="colors[3]" :pos="3" @clickCuadrado="clickCuadrado($event)"/>
-      <Square :color="colors[4]" :pos="4" @clickCuadrado="clickCuadrado($event)"/>
-      <Square :color="colors[5]" :pos="5" @clickCuadrado="clickCuadrado($event)"/>
+      <Square :color="this.$store.state.colors[3]" :pos="3" @clickCuadrado="clickCuadrado($event)"/>
+      <Square :color="this.$store.state.colors[4]" :pos="4" @clickCuadrado="clickCuadrado($event)"/>
+      <Square :color="this.$store.state.colors[5]" :pos="5" @clickCuadrado="clickCuadrado($event)"/>
     </div>   
   </div>
 
@@ -40,9 +40,9 @@
     },
     methods: {
       init(){
-        this.colors = this.createNewColors(this.esDificil)
-        this.pickedColor = this.colors[this.pickColor()]
-        this.$emit('colorElegido',this.pickedColor)
+        this.$store.state.colors = this.createNewColors(this.esDificil)
+        this.$store.state.pickedColor = this.$store.state.colors[this.pickColor()]
+        // this.$emit('colorElegido',this.pickedColor)
       },
       createNewColors(bool){
         let numbers= bool ? 6 : 3
@@ -68,20 +68,6 @@
         this.esDificil=estado
         this.init()
       },
-      clickCuadrado(color){
-        if(color[0] == this.pickedColor){
-          this.$emit('colorGanador')
-          // for (let i = 0; i < this.colors.length; i++) {
-          // this.colors.splice(i, 1, this.pickedColor) 
-          // }
-          this.colors = this.colors.map(()=>{
-            return this.pickedColor
-          });
-        } else {
-          this.$emit('colorPerdedor')
-          this.colors.splice([color[1]], 1, '#232323')
-        }
-      }
     },
     computed: {
     }

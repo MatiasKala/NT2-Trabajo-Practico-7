@@ -6,7 +6,7 @@
 
 		<button id="easy" :class="getClass(!isHard)" @click="cambiarAfacil()">easy</button>
 		<button id="hard" :class="getClass(isHard)" @click="cambiarAdificil()">hard</button>
-        <Body :isHard="isHard" @colorElegido="setColorElegido($event)" @colorGanador="mostrarMensajeGanador()" @colorPerdedor="mostrarMensajePerdedor()"/>
+        <Body :isHard="isHard" @colorGanador="mostrarMensajeGanador()" @colorPerdedor="mostrarMensajePerdedor()"/>
 	</div>
 
 </template>
@@ -52,19 +52,14 @@
 			}
 		},
 		resetear(){
-			this.message=""
+			this.$store.state.message=""
 			this.$emit('resetear',this.isHard)
-			this.$emit('resetearHeader')
-		},
-		setColorElegido(color){
-			this.$emit('colorElegidoHeader',color)
 		},
 		mostrarMensajeGanador(){
-			this.message = "You Picked Right!"
-			this.$emit('colorGanador')
+			this.$store.state.message = "You Picked Right!"
 		},
 		mostrarMensajePerdedor(){
-			this.message = "Try Again!"
+			this.$store.state.message = "Try Again!"
 		},
     },
     computed: {
