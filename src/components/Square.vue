@@ -5,25 +5,15 @@
 
 </template>
 
-<script lang="js">
+<script>
 
   export default  {
     name: 'square',
     props: ['pos'],
-    mounted () {
-
-    },
-    data () {
-      return {
-      }
-    },
     methods: {
       clickCudrado(){
         this.$store.dispatch('clickCuadradoVuex',[this.$store.state.colors[this.pos],this.pos])
       }
-    },
-    computed: {
-
     },
 }
 

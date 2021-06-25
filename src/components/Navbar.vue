@@ -17,16 +17,8 @@
 
   export default  {
     name: 'navbar',
-    props: [],
-    mounted () {
-
-    },
     components:{
         Body
-    },
-    data () {
-      return {
-      }
     },
     methods: {
 		cambiarAfacil(){

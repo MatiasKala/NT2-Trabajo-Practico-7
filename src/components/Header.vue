@@ -18,18 +18,8 @@
 
   export default  {
     name: 'header-component',
-    props: [],
-    mounted () {
-      
-    },
     components:{
       Navbar
-    },
-    data () {
-      return {
-      }
-    },
-    methods: {
     },
     filters:{
       sacarRGB:value => {
@@ -42,6 +32,9 @@
           'backgroundColor':this.$store.state.colorBack ? this.$store.state.colorBack : 'steelblue'
         }
       },
+     setColorElegido(){
+        return this.$store.state.pickedColor
+      }
     }
 }
 

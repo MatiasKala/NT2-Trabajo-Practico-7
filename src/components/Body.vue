@@ -21,24 +21,12 @@
 
   export default  {
     name: 'body-component',
-    props: [],
-    beforeMount(){
-    },
     mounted () {
-      this.$store.dispatch('reset','r')
+      this.$store.dispatch('reset')
     },
     components:{
       Square
     },
-    data () {
-      return {
-      }
-    },
-    methods: {
-
-    },
-    computed: {
-    }
 }
 
 
